@@ -59,7 +59,7 @@ class Activity(commands.GroupCog, name="actividad"):
 
         await interaction.edit_original_response(attachments=[file], embed=em)
         await asyncio.sleep(30)
-        await interaction.delete_original_message()
+        await interaction.delete_original_response()
 
     @app_commands.command(
         name="semanal",
@@ -96,7 +96,7 @@ class Activity(commands.GroupCog, name="actividad"):
 
         await interaction.edit_original_response(attachments=[file], embed=em)
         await asyncio.sleep(30)
-        await interaction.delete_original_message()
+        await interaction.delete_original_response()
 
     @app_commands.command(
         name="editar_url",
@@ -127,5 +127,5 @@ class Activity(commands.GroupCog, name="actividad"):
 
 
 async def setup(client: commands.Bot) -> None:
-    await client.add_cog(Activity(client), guilds=[discord.Object(770698123915165747), discord.Object(333585269502640138)])
+    await client.add_cog(Activity(client), guild=discord.Object(333585269502640138))
     print("Module Activity.py was loaded succesfully.")

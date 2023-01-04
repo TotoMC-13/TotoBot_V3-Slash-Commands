@@ -42,7 +42,7 @@ class Status(commands.Cog):
                 )
                 await interaction.edit_original_response(embed=em)
                 await asyncio.sleep(30)
-                await interaction.delete_original_message()
+                await interaction.delete_original_response()
             else:
                 if players_number == 0:
                     em = discord.Embed(
@@ -66,7 +66,7 @@ class Status(commands.Cog):
                     )
                     await interaction.edit_original_response(embed=em)
                     await asyncio.sleep(30)
-                    await interaction.delete_original_message()
+                    await interaction.delete_original_response()
                 elif private_number == 0:
                     em = discord.Embed(
                         title=f"{server_name}",
@@ -88,7 +88,7 @@ class Status(commands.Cog):
                     )
                     await interaction.edit_original_response(embed=em)
                     await asyncio.sleep(30)
-                    await interaction.delete_original_message()
+                    await interaction.delete_original_response()
                 elif len(players_names) == 0:
                     em = discord.Embed(
                         title=f"{server_name}",
@@ -111,7 +111,7 @@ class Status(commands.Cog):
                     )
                     await interaction.edit_original_response(embed=em)
                     await asyncio.sleep(30)
-                    await interaction.delete_original_message()
+                    await interaction.delete_original_response()
                 else:
                     em = discord.Embed(
                         title=f"{server_name}",
@@ -134,9 +134,9 @@ class Status(commands.Cog):
                     )
                     await interaction.edit_original_response(embed=em)
                     await asyncio.sleep(30)
-                    await interaction.delete_original_message()
+                    await interaction.delete_original_response()
 
 
 async def setup(client: commands.Bot) -> None:
-    await client.add_cog(Status(client), guilds=[discord.Object(770698123915165747), discord.Object(333585269502640138)])
+    await client.add_cog(Status(client), guild=discord.Object(333585269502640138))
     print("Module Status.py was loaded succesfully.")
