@@ -4,4 +4,4 @@ main.sqlite
 grafico.jpg
 .vscode
 .venv
-/config/.env
+/.env
