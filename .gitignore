@@ -3,4 +3,5 @@ old cogs
 main.sqlite
 grafico.jpg
 .vscode
-.env
+.venv
+/config/.env
