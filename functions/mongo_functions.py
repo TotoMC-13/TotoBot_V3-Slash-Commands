@@ -84,7 +84,6 @@ async def get_top() -> list[str]:
         user
         async for user in collection.find().sort("balance", pymongo.DESCENDING).limit(5)
     ]
-    print(top)
 
     client.close()
 
