@@ -56,7 +56,7 @@ class ActivityMentions(commands.Cog):
                 em.add_field(
                     name="\u200b", value=f"Actualizado <t:{round(time.time())}:R>."
                 )
-                message = await channel.send(f"<@{role_id}>", embed=em)
+                message = await channel.send(f"<@&{role_id}>", embed=em)
                 mention_sent = True
                 await message.delete(delay=mentions_interval)
                 while time.time() < timeout_start + timeout:
