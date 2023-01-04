@@ -15,7 +15,7 @@ class client(commands.Bot):
     def __init__(self):
         super().__init__(
             command_prefix=".",
-            intents=discord.Intents.default(),
+            intents=discord.Intents.all(),
             application_id=os.getenv("BOT_ID"),
         )
         self.synced = False

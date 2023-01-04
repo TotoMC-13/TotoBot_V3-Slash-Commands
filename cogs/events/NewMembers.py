@@ -46,5 +46,8 @@ class NewMembers(commands.Cog):
 
 
 async def setup(client: commands.Bot) -> None:
-    await client.add_cog(NewMembers(client))
+    await client.add_cog(NewMembers(client), guilds=[
+            discord.Object(id=770698123915165747),
+            discord.Object(id=333585269502640138)
+        ],)
     print(f"Module NewMembers.py was loaded succesfully.")
