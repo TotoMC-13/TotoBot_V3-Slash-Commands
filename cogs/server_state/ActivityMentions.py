@@ -63,7 +63,7 @@ class ActivityMentions(commands.Cog):
                     try:
                         await asyncio.sleep(240)
                         print("DEBUG: Trying to update mention... ")
-                        players_number = await get_status(server_1, True)
+                        players_number = get_status(server_1, True)
                         em.description = f"Hay **{players_number}** jugadores en el servidor. \n¡Animate a entrar!"
                         em.set_field_at(
                             0,
