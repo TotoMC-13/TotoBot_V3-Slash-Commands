@@ -139,5 +139,8 @@ class Economy(commands.GroupCog, name="dinero"):
 
 
 async def setup(client: commands.Bot) -> None:
-    await client.add_cog(Economy(client), guild=discord.Object(333585269502640138))
+    await client.add_cog(Economy(client), guilds=[
+            discord.Object(id=770698123915165747),
+            discord.Object(id=333585269502640138)
+        ],)
     print("Module Economy.py was loaded succesfully.")

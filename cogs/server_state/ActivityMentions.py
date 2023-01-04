@@ -75,5 +75,8 @@ class ActivityMentions(commands.Cog):
 
 
 async def setup(client: commands.Bot) -> None:
-    await client.add_cog(ActivityMentions(client), guild=discord.Object(333585269502640138))
+    await client.add_cog(ActivityMentions(client), guilds=[
+            discord.Object(id=770698123915165747),
+            discord.Object(id=333585269502640138)
+        ],)
     print("Module ActivityMentions.py was loaded succesfully.")

@@ -127,5 +127,8 @@ class Activity(commands.GroupCog, name="actividad"):
 
 
 async def setup(client: commands.Bot) -> None:
-    await client.add_cog(Activity(client), guild=discord.Object(333585269502640138))
+    await client.add_cog(Activity(client), guilds=[
+            discord.Object(id=770698123915165747),
+            discord.Object(id=333585269502640138)
+        ],)
     print("Module Activity.py was loaded succesfully.")

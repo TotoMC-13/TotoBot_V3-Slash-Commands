@@ -20,7 +20,10 @@ class BotManagement(commands.GroupCog, name="cogs"):
         await interaction.response.defer()
 
         await self.client.unload_extension(f"cogs.{extension}")
-        await self.client.tree.sync(guild=discord.Object(333585269502640138))
+        await self.client.tree.sync(guilds=[
+            discord.Object(id=770698123915165747),
+            discord.Object(id=333585269502640138)
+        ],)
         self.ignored_cogs.append(str(extension))
 
         embed = discord.Embed(
@@ -38,7 +41,10 @@ class BotManagement(commands.GroupCog, name="cogs"):
         print(extension)
         print(self.ignored_cogs[1])
         await self.client.load_extension(f"cogs.{extension}")
-        await self.client.tree.sync(guild=discord.Object(333585269502640138))
+        await self.client.tree.sync(guilds=[
+            discord.Object(id=770698123915165747),
+            discord.Object(id=333585269502640138)
+        ],)
         self.ignored_cogs.remove(str(extension))
 
         embed = discord.Embed(
@@ -54,7 +60,10 @@ class BotManagement(commands.GroupCog, name="cogs"):
         await interaction.response.defer()
 
         await self.client.reload_extension(f"cogs.{extension}")
-        await self.client.tree.sync(guild=discord.Object(333585269502640138))
+        await self.client.tree.sync(guilds=[
+            discord.Object(id=770698123915165747),
+            discord.Object(id=333585269502640138)
+        ],)
 
         embed = discord.Embed(
             title="Reload",
