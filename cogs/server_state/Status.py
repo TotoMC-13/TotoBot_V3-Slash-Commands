@@ -40,7 +40,7 @@ class Status(commands.Cog):
                 em.add_field(
                     name="\u200b", value=f"Eliminando <t:{round(time.time() + 30)}:R>"
                 )
-                await interaction.edit_original_message(embed=em)
+                await interaction.edit_original_response(embed=em)
                 await asyncio.sleep(30)
                 await interaction.delete_original_message()
             else:
@@ -64,7 +64,7 @@ class Status(commands.Cog):
                         name="\u200b",
                         value=f"Eliminando <t:{round(time.time() + 30)}:R>",
                     )
-                    await interaction.edit_original_message(embed=em)
+                    await interaction.edit_original_response(embed=em)
                     await asyncio.sleep(30)
                     await interaction.delete_original_message()
                 elif private_number == 0:
@@ -86,7 +86,7 @@ class Status(commands.Cog):
                         name="\u200b",
                         value=f"Eliminando <t:{round(time.time() + 30)}:R>",
                     )
-                    await interaction.edit_original_message(embed=em)
+                    await interaction.edit_original_response(embed=em)
                     await asyncio.sleep(30)
                     await interaction.delete_original_message()
                 elif len(players_names) == 0:
@@ -109,7 +109,7 @@ class Status(commands.Cog):
                         name="\u200b",
                         value=f"Eliminando <t:{round(time.time() + 30)}:R>",
                     )
-                    await interaction.edit_original_message(embed=em)
+                    await interaction.edit_original_response(embed=em)
                     await asyncio.sleep(30)
                     await interaction.delete_original_message()
                 else:
@@ -132,7 +132,7 @@ class Status(commands.Cog):
                         name="\u200b",
                         value=f"Eliminando <t:{round(time.time() + 30)}:R>",
                     )
-                    await interaction.edit_original_message(embed=em)
+                    await interaction.edit_original_response(embed=em)
                     await asyncio.sleep(30)
                     await interaction.delete_original_message()
 

@@ -34,7 +34,7 @@ class Activity(commands.GroupCog, name="actividad"):
         ss13_url = await get_skullnet_url(interaction=interaction)
 
         if not ss13_url:
-            await interaction.edit_original_message(
+            await interaction.edit_original_response(
                 content="Es necesario configurar el URL antes de utilizar este comando. Para configurarlo utiliza el comando `/actividad editar_url`, para mas información sobre como hacerlo utiliza `/actividad ayuda_url`. Por favor utiliza `/actividad ayuda_url`"
             )
             return
@@ -42,7 +42,7 @@ class Activity(commands.GroupCog, name="actividad"):
         try:
             await asyncio.to_thread(urllib.request.urlretrieve, ss13_url + "/daily", "grafico.jpg")
         except HTTPError:
-            await interaction.edit_original_message(
+            await interaction.edit_original_response(
                 content="Hubo un problerma al intentar obtener los gráficos, es probable que el enlace de la configuración ya no sea válido o el sitio web no funcione. Por favor utiliza `/actividad ayuda_url`"
             )
             return
@@ -57,7 +57,7 @@ class Activity(commands.GroupCog, name="actividad"):
         em.add_field(name="\u200b", value=f"Eliminando <t:{round(time.time() + 30)}:R>")
         em.set_image(url="attachment://grafico.jpg")
 
-        await interaction.edit_original_message(attachments=[file], embed=em)
+        await interaction.edit_original_response(attachments=[file], embed=em)
         await asyncio.sleep(30)
         await interaction.delete_original_message()
 
@@ -71,7 +71,7 @@ class Activity(commands.GroupCog, name="actividad"):
         ss13_url = await get_skullnet_url(interaction=interaction)
 
         if not ss13_url:
-            await interaction.edit_original_message(
+            await interaction.edit_original_response(
                 content="Es necesario configurar el URL antes de utilizar este comando. Para configurarlo utiliza el comando `/actividad editar_url`, para mas información sobre como hacerlo utiliza `/actividad ayuda_url`."
             )
             return
@@ -79,7 +79,7 @@ class Activity(commands.GroupCog, name="actividad"):
         try:
             await asyncio.to_thread(urllib.request.urlretrieve, ss13_url + "/weekly", "grafico.jpg")
         except HTTPError:
-            await interaction.edit_original_message(
+            await interaction.edit_original_response(
                 content="Hubo un problerma al intentar obtener los gráficos, es probable que el enlace de la configuración ya no sea válido o el sitio web no funcione."
             )
             return
@@ -94,7 +94,7 @@ class Activity(commands.GroupCog, name="actividad"):
         em.add_field(name="\u200b", value=f"Eliminando <t:{round(time.time() + 30)}:R>")
         em.set_image(url="attachment://grafico.jpg")
 
-        await interaction.edit_original_message(attachments=[file], embed=em)
+        await interaction.edit_original_response(attachments=[file], embed=em)
         await asyncio.sleep(30)
         await interaction.delete_original_message()
 
@@ -102,18 +102,19 @@ class Activity(commands.GroupCog, name="actividad"):
         name="editar_url",
         description="Permite editar la url de la cual el bot obtiene el gráfico.",
     )
+    @app_commands.checks.has_permissions(administrator=True)
     async def editar_url_grafico(self, interaction: discord.Interaction, url: str):
         await interaction.response.defer()
 
         if not url.startswith("https://ss13stats.skullnet.me/"):
-            await interaction.edit_original_message(
+            await interaction.edit_original_response(
                 content="El enlace ingresado no parece ser correcto, debe ser un enlace proveniente de https://ss13stats.skullnet.me/. \n\nPara obtener el URL del gráfico ingresa a https://ss13stats.skullnet.me/, busca el servidor correspondiente, dale click para acceder a los gráficos y copia el URL. \n\nPara ver este mensaje nuevamente utiliza el comando `/actividad ayuda_url`"
             )
             return
 
         await edit_skullnet_urls(interaction=interaction, skullnet_url=url)
 
-        await interaction.edit_original_message(content="URL configurado exitosamente.")
+        await interaction.edit_original_response(content="URL configurado exitosamente.")
 
     @app_commands.command(
         name="ayuda_url",

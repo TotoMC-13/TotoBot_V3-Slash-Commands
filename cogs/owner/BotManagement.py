@@ -28,7 +28,7 @@ class BotManagement(commands.GroupCog, name="cogs"):
             description=f"{extension} has been unloaded succesfully.",
             color=discord.Color.green(),
         )
-        await interaction.edit_original_message(embed=embed)
+        await interaction.edit_original_response(embed=embed)
 
     @is_owner()
     @app_commands.command(name="load", description="Loads a cog.")
@@ -46,7 +46,7 @@ class BotManagement(commands.GroupCog, name="cogs"):
             description=f"{extension} has been loaded succesfully.",
             color=discord.Color.green(),
         )
-        await interaction.edit_original_message(embed=embed)
+        await interaction.edit_original_response(embed=embed)
 
     @is_owner()
     @app_commands.command(name="reload", description="Reload the selected cog.")
@@ -61,7 +61,7 @@ class BotManagement(commands.GroupCog, name="cogs"):
             description=f"{extension} was successfully reloaded",
             color=discord.Colour.green(),
         )
-        await interaction.edit_original_message(embed=embed)
+        await interaction.edit_original_response(embed=embed)
 
     @is_owner()
     @app_commands.command(name="reload_all", description="Reloads all cogs.")
@@ -91,7 +91,7 @@ class BotManagement(commands.GroupCog, name="cogs"):
 
         embed.add_field(name="Loaded: ", value=f"{loaded_cogs}", inline=False)
         embed.add_field(name="Ignored: ", value=f"{unloaded_cogs}", inline=False)
-        await interaction.edit_original_message(embed=embed)
+        await interaction.edit_original_response(embed=embed)
 
     @app_commands.command(
         name="list", description="Lists all cogs, both loaded and unloaded."
@@ -122,7 +122,7 @@ class BotManagement(commands.GroupCog, name="cogs"):
             value=", ".join(unloaded_cogs) if unloaded_cogs else "All cogs are loaded.",
             inline=False,
         )
-        await interaction.edit_original_message(embed=embed)
+        await interaction.edit_original_response(embed=embed)
 
 
 async def setup(client: commands.Bot) -> None:

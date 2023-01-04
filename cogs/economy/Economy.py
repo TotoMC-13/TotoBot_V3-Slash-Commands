@@ -31,12 +31,13 @@ class Economy(commands.GroupCog, name="dinero"):
         em.set_thumbnail(
             url="https://cdn.discordapp.com/attachments/626176190721556481/726555014423904337/logo.png"
         )
-        await interaction.edit_original_message(embed=em)
+        await interaction.edit_original_response(embed=em)
 
     @app_commands.command(
         name="agregar",
         description="Permite agregar dinero a la cuenta del usuario seleccionado.",
     )
+    @app_commands.checks.has_permissions(administrator=True)
     async def agregar(
         self, interaction: discord.Interaction, target_user: discord.Member, amount: int
     ):
@@ -55,12 +56,13 @@ class Economy(commands.GroupCog, name="dinero"):
         em.set_thumbnail(
             url="https://cdn.discordapp.com/attachments/626176190721556481/726555014423904337/logo.png"
         )
-        await interaction.edit_original_message(embed=em)
+        await interaction.edit_original_response(embed=em)
 
     @app_commands.command(
         name="quitar",
         description="Permite quitar dinero de la cuenta del usuario seleccionado.",
     )
+    @app_commands.checks.has_permissions(administrator=True)
     async def quitar(
         self, interaction: discord.Interaction, target_user: discord.Member, amount: int
     ):
@@ -81,7 +83,7 @@ class Economy(commands.GroupCog, name="dinero"):
             em.set_thumbnail(
                 url="https://cdn.discordapp.com/attachments/626176190721556481/726555014423904337/logo.png"
             )
-            await interaction.edit_original_message(embed=em)
+            await interaction.edit_original_response(embed=em)
         except Exception as e:
             if str(e) == "Not enough funds":
                 old_balance = await get_balance(target_user)
@@ -98,7 +100,7 @@ class Economy(commands.GroupCog, name="dinero"):
                 em.set_thumbnail(
                     url="https://cdn.discordapp.com/attachments/626176190721556481/726555014423904337/logo.png"
                 )
-                await interaction.edit_original_message(embed=em)
+                await interaction.edit_original_response(embed=em)
             else:
                 raise Exception(e)
 
@@ -133,7 +135,7 @@ class Economy(commands.GroupCog, name="dinero"):
                 em.add_field(name=str_name, value=f"**`{username}`**", inline=True)
                 em.add_field(name=str_amount, value=f"**<:hispasoles:922903735418630174>`{user['balance']}`**", inline=True)
         
-        await interaction.edit_original_message(embed=em)
+        await interaction.edit_original_response(embed=em)
 
 
 async def setup(client: commands.Bot) -> None:
