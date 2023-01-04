@@ -29,7 +29,7 @@ class client(commands.Bot):
         for cog in target_dir.rglob("*.py"):
             await self.load_extension(f"cogs.{cog.parent.name}.{cog.stem}")
 
-        await cltree.sync(guild=discord.Object(770698123915165747))
+        await cltree.sync(guilds=[discord.Object(770698123915165747), discord.Object(333585269502640138)])
         self.synced = True
 
     async def on_ready(self):
