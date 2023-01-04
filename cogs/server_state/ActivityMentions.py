@@ -71,8 +71,8 @@ class ActivityMentions(commands.Cog):
                             value=f"Actualizado <t:{round(time.time())}:R>.",
                         )
                         await message.edit(embed=em)
-                    except Exception as e:
-                        raise e
+                    except:
+                        pass
 
 
 async def setup(client: commands.Bot) -> None:
