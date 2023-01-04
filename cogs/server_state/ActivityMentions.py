@@ -62,6 +62,7 @@ class ActivityMentions(commands.Cog):
                 while time.time() < timeout_start + timeout:
                     try:
                         await asyncio.sleep(240)
+                        print("DEBUG: Trying to update mention... ")
                         players_number = await self.get_status(server_1)
                         em.description = f"Hay **{players_number}** jugadores en el servidor. \n¡Animate a entrar!"
                         em.set_field_at(
@@ -70,8 +71,8 @@ class ActivityMentions(commands.Cog):
                             value=f"Actualizado <t:{round(time.time())}:R>.",
                         )
                         await message.edit(embed=em)
-                    except:
-                        pass
+                    except Exception as e:
+                        raise e
 
 
 async def setup(client: commands.Bot) -> None:
