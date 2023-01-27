@@ -23,19 +23,21 @@ class Minecraft(commands.Cog):
         
         try:
             server = JavaServer.lookup("penesinietro.aternos.me")
-            status = await server.async_status()
         except:
-            server = None
+            em = discord.Embed(title="Servidor Pene Sinietro", description="Estado del servidor OFFLINE", color=discord.Color.red())
+
 
         if server:
+            status = await server.async_status()
+
+            players_names = [player.name for player in status.players.sample]
+
             em = discord.Embed(title="Servidor Pene Sinietro", description="Estado del servidor ONLINE", color=discord.Color.green())
-            em.add_field(name="Jugadores conectados:", value=f"`{status.players.online} jugadores en el servidor`")
+            em.add_field(name="Número de jugadores conectados:", value=f"`{status.players.online} jugadores en el servidor`")
+            em.add_field(name="Jugadores conectados:", value=f"`{', '.join(players_names)}`")
             em.add_field(name="Latencia:", value=f"`{round(status.latency)} ms`")
             em.add_field(name="\u200b", value=f"Eliminando <t:{round(time.time() + 30)}:R>")
-        else:
-            em = discord.Embed(title="Servidor Pene Sinietro", description="Estado del servidor OFFLINE", color=discord.Color.red())
-            em.add_field(name="\u200b", value=f"Eliminando <t:{round(time.time() + 30)}:R>")
-            
+                
         await interaction.edit_original_response(embed=em)
         await asyncio.sleep(30)
         await interaction.delete_original_response()
