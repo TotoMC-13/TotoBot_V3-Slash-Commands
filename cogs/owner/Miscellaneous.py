@@ -20,14 +20,20 @@ class Minecraft(commands.Cog):
     )
     async def mc_server(self, interaction: discord.Interaction):
         await interaction.response.defer()
+
+        server = None
         
         try:
             server = JavaServer.lookup("penesinietro.aternos.me")
+            status = server.status()
         except:
             em = discord.Embed(title="Servidor Pene Sinietro", description="Estado del servidor OFFLINE", color=discord.Color.red())
+            em.add_field(name="\u200b", value=f"Eliminando <t:{round(time.time() + 30)}:R>")
 
-
-        if server:
+        if "offline" in status.description:  
+            em = discord.Embed(title="Servidor Pene Sinietro", description="Estado del servidor OFFLINE", color=discord.Color.red())
+            em.add_field(name="\u200b", value=f"Eliminando <t:{round(time.time() + 30)}:R>")
+        elif server:
             status = await server.async_status()
 
             players_names = [player.name for player in status.players.sample]
@@ -41,7 +47,6 @@ class Minecraft(commands.Cog):
         await interaction.edit_original_response(embed=em)
         await asyncio.sleep(30)
         await interaction.delete_original_response()
-
 
 async def setup(client: commands.Bot) -> None:
     await client.add_cog(
