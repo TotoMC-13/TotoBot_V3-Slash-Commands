@@ -51,6 +51,10 @@ def get_status(server, number_only=False):
         return players_number
 
     find_map = re.findall(r"NSS (\w+)", str(div_tag_parent))
-    current_map = "NSS " + find_map[0]
+
+    if find_map:
+        current_map = "NSS " + find_map[0]
+    else:
+        current_map = "???"
 
     return players_names, players_number, private_number, current_map
