@@ -3,6 +3,7 @@ import discord
 from discord import app_commands
 from discord.ext import commands
 import asyncio
+from decorators import is_owner
 
 # TIME IMPORTS
 import time
@@ -47,6 +48,13 @@ class Minecraft(commands.Cog):
         await interaction.edit_original_response(embed=em)
         await asyncio.sleep(30)
         await interaction.delete_original_response()
+    
+    @app_commands.command(name="habla", description="¡ESTA VIVO!")
+    @is_owner()
+    async def habla(self, interaction: discord.Interaction, channel: discord.TextChannel, message: str):
+        await interaction.response.defer(ephemeral=True)
+        await channel.send(content=message)
+        await interaction.edit_original_response(content=f"Mensaje enviado a {channel.mention}: \nContenido: {message}")
 
 async def setup(client: commands.Bot) -> None:
     await client.add_cog(
