@@ -3,7 +3,7 @@ import discord
 from discord import app_commands
 from discord.ext import commands
 import asyncio
-from decorators import is_owner
+from decorators.is_owner import *
 
 # TIME IMPORTS
 import time
