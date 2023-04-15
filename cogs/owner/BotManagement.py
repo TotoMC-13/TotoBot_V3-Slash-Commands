@@ -139,6 +139,7 @@ async def setup(client: commands.Bot) -> None:
         BotManagement(client),
         guilds=[
             discord.Object(id=333585269502640138),
+            discord.Object(id=770698123915165747)
         ],
     )
     print("Module BotManagement.py was loaded succesfully.")
