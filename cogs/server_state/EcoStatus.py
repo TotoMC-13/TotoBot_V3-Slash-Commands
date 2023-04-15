@@ -30,11 +30,11 @@ class EcoStatus(commands.Cog):
         else:
             em = discord.Embed(title="Hispania ECO", description="Estado del servidor: ONLINE", url="http://209.222.97.90:3001/",color=discord.Colour.blue())
             em.add_field(name="Jugadores online:", value=f"`{player_count}`")
-            em.add_field(name="Dia:", value=f"`{day}`")
+            em.add_field(name="Día:", value=f"`{day}`")
             em.add_field(name="Hora:", value=f"`{server_time}`")
             em.add_field(name="ETA Impacto Meteorito:", value=f"`{meteor_eta}`")
             em.add_field(name="Información del Servidor:", value=f"[Sitio web](http://209.222.97.90:3001/)")
-            em.add_field(name="¡Unete al servidor!:", value=f"<eco://connect/d1c2278f-dd07-47b4-a2f8-543cc62b71a1>")
+            em.add_field(name="¡Únete al servidor!:", value=f"<eco://connect/d1c2278f-dd07-47b4-a2f8-543cc62b71a1>")
             em.add_field(name="\u200b", value=f"Eliminando <t:{round(time.time() + 30)}:R>")
             em.set_thumbnail(url="https://cdn.discordapp.com/attachments/770698123915165750/1096851481174483095/logo.png")
 
