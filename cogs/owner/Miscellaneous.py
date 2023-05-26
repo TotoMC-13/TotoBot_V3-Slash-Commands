@@ -25,7 +25,7 @@ class Minecraft(commands.Cog):
         server = None
         
         try:
-            server = JavaServer.lookup("penesinietro.aternos.me")
+            server = JavaServer.lookup("empanadadepollo.aternos.me")
             status = server.status()
         except:
             em = discord.Embed(title="Servidor Pene Sinietro", description="Estado del servidor OFFLINE", color=discord.Color.red())
