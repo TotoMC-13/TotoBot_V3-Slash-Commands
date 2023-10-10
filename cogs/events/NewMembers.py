@@ -21,9 +21,16 @@ class NewMembers(commands.Cog):
                 value=f"""
                 \n\n ➭ Pasate por <#528252827672510495> para saber las normas basicas del servidor. 
                 \n\n ➭ En caso de que vengas a buscar alguna mesa o anunciar la propia, tu canal es <#1160344156435120189>. 
-                \n\n ➭ Si te interesa nuestro servidor de SS13, el canal es <#333588005824757762>. Tambien es recomendable pasar por <#408667066867122176> o preguntar en <#408664655725330432>. 
-                \n\nEnlaces útiles: [Nuestra wiki](http://hispaniastation.net/)""",
+                \n\n ➭ Si te interesa nuestro servidor de SS13, el canal es <#333588005824757762>""",
             )
+            em.add_field(
+                name=f"Acerca de SS13:",
+                value=f"""
+                \n\n ➭ Si te interesa nuestro servidor de SS13, el canal es <#333588005824757762>.
+                \n\n ➭ En caso de que tengas alguna duda, es recomendable pasar por <#408667066867122176> o preguntar en <#408664655725330432>. 
+                \n\n ➭ El comando **/estado** te permitira ver el numero de jugadores actuales en nuestro servidor de SS13. 
+                \n\nEnlaces útiles: [Nuestra wiki](http://hispaniastation.net/)"""
+                )
             em.set_thumbnail(
                 url="https://cdn.discordapp.com/attachments/626176190721556481/726555014423904337/logo.png"
             )
