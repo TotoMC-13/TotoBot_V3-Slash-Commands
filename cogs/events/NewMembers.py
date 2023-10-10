@@ -13,15 +13,15 @@ class NewMembers(commands.Cog):
             channel = self.client.get_channel(333585269502640138)
             em = discord.Embed(
                 title=f"Hola {member}!",
-                description=f"Bienvenido/a a la **Comunidad Hispania de SS13**",
+                description=f"Bienvenido/a a la **Comunidad Hispania**",
                 color=discord.Colour.red(),
             )
             em.add_field(
                 name=f"Cosas que te recomendamos hacer:",
                 value=f"""
                 \n\n ➭ Pasate por <#528252827672510495> para saber las normas basicas del servidor. 
-                \n\n ➭ En <#795535799088971786> podras asignarte los roles que quieras. 
-                \n\n ➭ Si tienes alguna pregunta no dudes en pasar por <#408667066867122176> o pregunta en <#408664655725330432>. 
+                \n\n ➭ En caso de que vengas a buscar alguna mesa o anunciar la propia, tu canal es <#1160344156435120189>. 
+                \n\n ➭ Si te interesa nuestro servidor de SS13, el canal es <#333588005824757762>. Tambien es recomendable pasar por <#408667066867122176> o preguntar en <#408664655725330432>. 
                 \n\nEnlaces útiles: [Nuestra wiki](http://hispaniastation.net/)""",
             )
             em.set_thumbnail(
