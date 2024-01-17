@@ -27,7 +27,7 @@ class Status(commands.Cog):
         servers = [os.getenv("SERVER_1"), os.getenv("SERVER_2")]
 
         for server_name in servers:
-            if server == os.getenv("SERVER_1")
+            if server == os.getenv("SERVER_1"):
                 ip_server = os.getenv("IP_SERVER_1")
             else:
                 ip_server = os.getenv("IP_SERVER_2")
