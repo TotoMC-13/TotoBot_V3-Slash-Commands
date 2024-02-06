@@ -24,25 +24,15 @@ class Status(commands.Cog):
     async def status(self, interaction: discord.Interaction):
         await interaction.response.defer(thinking=True)
 
-<<<<<<< Updated upstream
-        servers = [os.getenv("SERVER_1"), os.getenv("SERVER_2")]
-
-        for server_name in servers:
-            if server == os.getenv("SERVER_1"):
-                ip_server = os.getenv("IP_SERVER_1")
-            else:
-                ip_server = os.getenv("IP_SERVER_2")
-            
-=======
-        servers = [os.getenv("SERVERS_NAMES").split(",")]
-        ips_servers = [os.getenv("SERVERS_IPS").split(",")]
-        print(ips_servers)
+        servers = os.getenv("SERVERS_NAMES").split(",")
+        ips_servers = os.getenv("SERVERS_IPS").split(",")
         #channels_ids = [os.getenv("CHANNELS_IDS").split(",")] NO ESTOY SEGURO SI ESTO ES NECESARIO
 
+        embed_list = []
+
         for index, server_name in enumerate(servers):
->>>>>>> Stashed changes
+            print(server_name)
             players_names, players_number, private_number, current_map = get_status(server_name)
-            ip_server = ips_servers[index]
 
             if players_number is None:
                 em = discord.Embed(
@@ -53,9 +43,7 @@ class Status(commands.Cog):
                 em.add_field(
                     name="\u200b", value=f"Eliminando <t:{round(time.time() + 30)}:R>"
                 )
-                await interaction.edit_original_response(embed=em)
-                await asyncio.sleep(30)
-                await interaction.delete_original_response()
+                embed_list.append(em)
             else:
                 if players_number == 0:
                     em = discord.Embed(
@@ -72,14 +60,12 @@ class Status(commands.Cog):
                         value="`No hay jugadores conectados`",
                     )
                     em.add_field(name="Mapa actual: ", value=f"`{current_map}`")
-                    em.add_field(name="¡Entra al servidor!", value=f"<{ip_server}>")
+                    em.add_field(name="¡Entra al servidor!", value=f"<{ips_servers[index]}>")
                     em.add_field(
                         name="\u200b",
                         value=f"Eliminando <t:{round(time.time() + 30)}:R>",
                     )
-                    await interaction.edit_original_response(embed=em)
-                    await asyncio.sleep(30)
-                    await interaction.delete_original_response()
+                    embed_list.append(em)
                 elif private_number == 0:
                     em = discord.Embed(
                         title=f"{server_name}",
@@ -94,14 +80,12 @@ class Status(commands.Cog):
                         name=f"Jugadores conectados: ", value=f"`{players_names}`"
                     )
                     em.add_field(name="Mapa actual: ", value=f"`{current_map}`")
-                    em.add_field(name="¡Entra al servidor!", value=f"<{ip_server}>")
+                    em.add_field(name="¡Entra al servidor!", value=f"<{ips_servers[index]}>")
                     em.add_field(
                         name="\u200b",
                         value=f"Eliminando <t:{round(time.time() + 30)}:R>",
                     )
-                    await interaction.edit_original_response(embed=em)
-                    await asyncio.sleep(30)
-                    await interaction.delete_original_response()
+                    embed_list.append(em)
                 elif len(players_names) == 0:
                     em = discord.Embed(
                         title=f"{server_name}",
@@ -117,14 +101,12 @@ class Status(commands.Cog):
                         value=f"`{private_number} private`",
                     )
                     em.add_field(name="Mapa actual: ", value=f"`{current_map}`")
-                    em.add_field(name="¡Entra al servidor!", value=f"<{ip_server}>")
+                    em.add_field(name="¡Entra al servidor!", value=f"<{ips_servers[index]}>")
                     em.add_field(
                         name="\u200b",
                         value=f"Eliminando <t:{round(time.time() + 30)}:R>",
                     )
-                    await interaction.edit_original_response(embed=em)
-                    await asyncio.sleep(30)
-                    await interaction.delete_original_response()
+                    embed_list.append(em)
                 else:
                     em = discord.Embed(
                         title=f"{server_name}",
@@ -140,15 +122,17 @@ class Status(commands.Cog):
                         value=f"`{players_names}, {private_number} private`",
                     )
                     em.add_field(name="Mapa actual: ", value=f"`{current_map}`")
-                    em.add_field(name="¡Entra al servidor!", value=f"<{ip_server}>")
+                    em.add_field(name="¡Entra al servidor!", value=f"<{ips_servers[index]}>")
                     em.add_field(
                         name="\u200b",
                         value=f"Eliminando <t:{round(time.time() + 30)}:R>",
                     )
-                    await interaction.edit_original_response(embed=em)
-                    await asyncio.sleep(30)
-                    await interaction.delete_original_response()
-
+                    embed_list.append(em)
+        
+        print(embed_list)
+        await interaction.edit_original_response(embeds=embed_list)
+        await asyncio.sleep(30)
+        await interaction.delete_original_response()
 
 async def setup(client: commands.Bot) -> None:
     await client.add_cog(Status(client), guilds=[
