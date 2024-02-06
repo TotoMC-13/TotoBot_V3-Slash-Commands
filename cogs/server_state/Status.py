@@ -24,6 +24,7 @@ class Status(commands.Cog):
     async def status(self, interaction: discord.Interaction):
         await interaction.response.defer(thinking=True)
 
+<<<<<<< Updated upstream
         servers = [os.getenv("SERVER_1"), os.getenv("SERVER_2")]
 
         for server_name in servers:
@@ -32,7 +33,16 @@ class Status(commands.Cog):
             else:
                 ip_server = os.getenv("IP_SERVER_2")
             
+=======
+        servers = [os.getenv("SERVERS_NAMES").split(",")]
+        ips_servers = [os.getenv("SERVERS_IPS").split(",")]
+        print(ips_servers)
+        #channels_ids = [os.getenv("CHANNELS_IDS").split(",")] NO ESTOY SEGURO SI ESTO ES NECESARIO
+
+        for index, server_name in enumerate(servers):
+>>>>>>> Stashed changes
             players_names, players_number, private_number, current_map = get_status(server_name)
+            ip_server = ips_servers[index]
 
             if players_number is None:
                 em = discord.Embed(
