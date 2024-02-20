@@ -26,7 +26,6 @@ class Status(commands.Cog):
 
         servers = os.getenv("SERVERS_NAMES").split(",")
         ips_servers = os.getenv("SERVERS_IPS").split(",")
-        #channels_ids = [os.getenv("CHANNELS_IDS").split(",")] NO ESTOY SEGURO SI ESTO ES NECESARIO
 
         embed_list = []
 
