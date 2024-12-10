@@ -24,52 +24,8 @@ class Activity(commands.GroupCog, name="actividad"):
 
     ssl._create_default_https_context = ssl._create_unverified_context
 
-    @app_commands.command(
-        name="diaria",
-        description="Permite ver un grafico con la actividad diaria del servidor.",
-    )
-    async def actividad_diaria(self, interaction: discord.Interaction):
-        await interaction.response.defer()
-
+    async def fetch_and_send_graph(self, interaction, url_suffix, title, description):
         ss13_url = await get_skullnet_url(interaction=interaction)
-
-        if not ss13_url:
-            await interaction.edit_original_response(
-                content="Es necesario configurar el URL antes de utilizar este comando. Para configurarlo utiliza el comando `/actividad editar_url`, para mas información sobre como hacerlo utiliza `/actividad ayuda_url`. Por favor utiliza `/actividad ayuda_url`"
-            )
-            return
-
-        try:
-            await asyncio.to_thread(urllib.request.urlretrieve, ss13_url + "/daily", "grafico.jpg")
-        except HTTPError:
-            await interaction.edit_original_response(
-                content="Hubo un problerma al intentar obtener los gráficos, es probable que el enlace de la configuración ya no sea válido o el sitio web no funcione. Por favor utiliza `/actividad ayuda_url`"
-            )
-            return
-
-        file = discord.File("./grafico.jpg")
-
-        em = discord.Embed(
-            title="[ES]Hispania - Paracode",
-            description="Jugadores en el servidor en las últimas 24hs",
-            color=discord.Colour.red(),
-        )
-        em.add_field(name="\u200b", value=f"Eliminando <t:{round(time.time() + 30)}:R>")
-        em.set_image(url="attachment://grafico.jpg")
-
-        await interaction.edit_original_response(attachments=[file], embed=em)
-        await asyncio.sleep(30)
-        await interaction.delete_original_response()
-
-    @app_commands.command(
-        name="semanal",
-        description="Permite ver un grafico con la actividad semanal del servidor.",
-    )
-    async def actividad_semanal(self, interaction: discord.Interaction):
-        await interaction.response.defer()
-
-        ss13_url = await get_skullnet_url(interaction=interaction)
-
         if not ss13_url:
             await interaction.edit_original_response(
                 content="Es necesario configurar el URL antes de utilizar este comando. Para configurarlo utiliza el comando `/actividad editar_url`, para mas información sobre como hacerlo utiliza `/actividad ayuda_url`."
@@ -77,26 +33,30 @@ class Activity(commands.GroupCog, name="actividad"):
             return
 
         try:
-            await asyncio.to_thread(urllib.request.urlretrieve, ss13_url + "/weekly", "grafico.jpg")
+            await asyncio.to_thread(urllib.request.urlretrieve, ss13_url + url_suffix, "grafico.jpg")
         except HTTPError:
             await interaction.edit_original_response(
-                content="Hubo un problerma al intentar obtener los gráficos, es probable que el enlace de la configuración ya no sea válido o el sitio web no funcione."
+                content="Hubo un problema al intentar obtener los gráficos, es probable que el enlace de la configuración ya no sea válido o el sitio web no funcione."
             )
             return
 
         file = discord.File("./grafico.jpg")
-
-        em = discord.Embed(
-            title="[ES]Hispania - Paracode",
-            description="Jugadores en el servidor en los últimos 7 días.",
-            color=discord.Colour.red(),
-        )
+        em = discord.Embed(title=title, description=description, color=discord.Colour.red())
         em.add_field(name="\u200b", value=f"Eliminando <t:{round(time.time() + 30)}:R>")
         em.set_image(url="attachment://grafico.jpg")
-
         await interaction.edit_original_response(attachments=[file], embed=em)
         await asyncio.sleep(30)
         await interaction.delete_original_response()
+
+    @app_commands.command(name="diaria", description="Permite ver un grafico con la actividad diaria del servidor.")
+    async def actividad_diaria(self, interaction: discord.Interaction):
+        await interaction.response.defer()
+        await self.fetch_and_send_graph(interaction, "/daily", "[ES]Hispania - Paracode", "Jugadores en el servidor en las últimas 24hs")
+
+    @app_commands.command(name="semanal", description="Permite ver un grafico con la actividad semanal del servidor.")
+    async def actividad_semanal(self, interaction: discord.Interaction):
+        await interaction.response.defer()
+        await self.fetch_and_send_graph(interaction, "/weekly", "[ES]Hispania - Paracode", "Jugadores en el servidor en los últimos 7 días.")
 
     @app_commands.command(
         name="editar_url",

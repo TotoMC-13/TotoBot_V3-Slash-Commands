@@ -48,7 +48,7 @@ class BotManagement(commands.GroupCog, name="cogs"):
         self.ignored_cogs.remove(str(extension))
 
         embed = discord.Embed(
-            title="Unload",
+            title="Load",
             description=f"{extension} has been loaded succesfully.",
             color=discord.Color.green(),
         )
@@ -76,30 +76,25 @@ class BotManagement(commands.GroupCog, name="cogs"):
     @app_commands.command(name="reload_all", description="Reloads all cogs.")
     async def reload_all(self, interaction: discord.Interaction):
         await interaction.response.defer()
-
         cogs = []
         target_dir = Path.cwd() / "cogs"
 
-        embed = discord.Embed(
-            title="Reload",
-            description=f"All extensions have been reloaded.",
-            color=discord.Colour.green(),
-        )
-
         for cog in target_dir.rglob("*.py"):
-            if f"{cog.parent.name}.{cog.stem}" not in self.ignored_cogs:
-                await self.client.reload_extension(f"cogs.{cog.parent.name}.{cog.stem}")
-                cogs.append(f"{cog.parent.name}.{cog.stem}")
+            cog_name = f"cogs.{cog.parent.name}.{cog.stem}"
+            if cog_name not in self.ignored_cogs:
+                await self.client.reload_extension(cog_name)
+                cogs.append(cog_name)
 
         loaded_cogs = ", ".join(cogs)
-        unloaded_cogs = (
-            ", ".join(self.ignored_cogs)
-            if len(self.ignored_cogs) > 1
-            else self.ignored_cogs[0]
-        )
+        unloaded_cogs = ", ".join(self.ignored_cogs) if self.ignored_cogs else "None"
 
-        embed.add_field(name="Loaded: ", value=f"{loaded_cogs}", inline=False)
-        embed.add_field(name="Ignored: ", value=f"{unloaded_cogs}", inline=False)
+        embed = discord.Embed(
+            title="Reload",
+            description="All extensions have been reloaded.",
+            color=discord.Colour.green(),
+        )
+        embed.add_field(name="Loaded: ", value=loaded_cogs, inline=False)
+        embed.add_field(name="Ignored: ", value=unloaded_cogs, inline=False)
         await interaction.edit_original_response(embed=embed)
 
     @app_commands.command(

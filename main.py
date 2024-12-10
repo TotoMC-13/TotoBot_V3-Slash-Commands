@@ -23,16 +23,12 @@ class client(commands.Bot):
 
     async def setup_hook(self) -> None:
         self.session = aiohttp.ClientSession()
-
         target_dir = Path.cwd() / "cogs"
-
         for cog in target_dir.rglob("*.py"):
             await self.load_extension(f"cogs.{cog.parent.name}.{cog.stem}")
-
-        await cltree.sync(guild=discord.Object(770698123915165747))
-        await cltree.sync(guild=discord.Object(333585269502640138))
-        await cltree.sync(guild=discord.Object(864993787835056138))
-
+        guild_ids = [770698123915165747, 333585269502640138, 864993787835056138]
+        for guild_id in guild_ids:
+            await cltree.sync(guild=discord.Object(guild_id))
         self.synced = True
 
     async def on_ready(self):
@@ -46,4 +42,5 @@ cltree = aclient.tree
 load_dotenv()
 
 if __name__ == "__main__":
+    load_dotenv()
     aclient.run(os.getenv("TOKEN"))
