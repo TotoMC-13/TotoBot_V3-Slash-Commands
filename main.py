@@ -32,6 +32,7 @@ class client(commands.Bot):
         await cltree.sync(guild=discord.Object(770698123915165747))
         await cltree.sync(guild=discord.Object(333585269502640138))
         await cltree.sync(guild=discord.Object(864993787835056138))
+        await cltree.sync(guild=discord.Object(1272666538096332992))
 
         self.synced = True
 
