@@ -136,6 +136,7 @@ class Status(commands.Cog):
 async def setup(client: commands.Bot) -> None:
     await client.add_cog(Status(client), guilds=[
             discord.Object(id=770698123915165747),
-            discord.Object(id=333585269502640138)
+            discord.Object(id=333585269502640138),
+            discord.Object(id=1272666538096332992)
         ],)
     print("Module Status.py was loaded succesfully.")
